@@ -1,0 +1,72 @@
+MEGA-PNA on AMLSim: setup and reproduction
+
+Checkout: https://github.com/hcagri/MEGA-GNN-TMLR
+Revision: 2fb49c304192e073e054f510491bbfeca051565c
+Installed at C:\habib dissertation\Projects\new pipeline\MEGA-GNN-TMLR
+
+The .venv is isolated: Python3.9.13, PyTorch2.2.2+cpu, PyG2.5.2,
+torch_scatter2.1.2+pt22cpu and torch_sparse0.6.18+pt22cpu.
+requirements-amlsim-lock.txt records the full environment.
+This environment supports the requested official MEGA-PNA model and AMLSim
+adapter. It does not build unrelated datasets' C++ port-numbering extension.
+Online experiment tracking is disabled; no datasets are uploaded.
+
+Run from this checkout in PowerShell:
+  & '.\.venv\Scripts\python.exe' -B -u '.\run_amlsim_audit.py' --threads 8
+
+This resumes an interrupted run from latest.pt, including optimizer and RNG
+state, and rejects a changed protocol. Once training_complete.json exists,
+it evaluates the saved best.pt without training further.
+
+Evaluation and verification only:
+  & '.\.venv\Scripts\python.exe' -B -u '.\run_amlsim_audit.py' --threads 8 --verify-only
+  & '.\.venv\Scripts\python.exe' -B -u '.\verify_amlsim_audit.py'
+
+Input CSVs are read-only in the existing AML framework:
+C:\habib dissertation\Projects\defence\aml_starting_point_framwork\data\raw\ibm_amlsim
+
+Outputs: results\amlsim_edge_audit_v1
+- REPORT.txt: human-readable results and limitations
+- protocol.json: settings, upstream revision, feature/split/raw/source hashes
+- status.json: current state and process ID
+- best.pt / latest.pt: selected model and resumable checkpoint
+- training_history.json: training loss and validation-only selection metrics
+- summary.json: all split denominators, F1, confusion counts, retention and drift
+- node_index.npz / predictions.npz: every account ID, label, split and prediction
+- transaction_ids.npy: raw CSV transaction row IDs for edge identity
+- verification.json / independent_verification.json: replay and metric checks
+
+AMLSim-specific choices
+Task is account/node classification. The published IBM AML experiments instead
+classify transaction edges; the official ETH node head is reused here, via its
+standard seed-node ordering implementation (hetero_node_per_neighbor).
+The model architecture, encoder, head and aggregation source files are unchanged.
+mega_amlsim_adapter.py imports only required modules, avoiding the package's
+eager import of all optional datasets and architectures.
+
+All 1323234 individual transfers are retained, including repeated account pairs
+and 181 self-transfers. Reverse message-passing copies form a second relation.
+Inputs: z-normalized timestamp and amount on each edge; constant zero node inputs,
+matching the upstream normalized-ones convention. Every transaction type in this
+dataset is TRANSFER, so no varying type/currency inputs exist. Labels, identifiers,
+behavior codes, alert metadata and precomputed account statistics are not inputs.
+Normalization uses the unlabeled full graph in this transductive account split.
+Split: original stratified seed42 account split, 6500/1500/2000 train/val/test.
+
+One predeclared training seed42. Official node-classification configuration:
+2 layers, width20, 5 PNA towers, PNA multi-edge aggregation, reverse messages,
+edge updates, residuals, batch normalization and dropout0.1. Adam0.0008,
+weight decay0.00001. Train-only inverse-frequency class weights.
+Full-batch CPU training, maximum200 epochs, patience40 epochs, validation every5
+epochs (and epoch1). Selection is validation illicit F1, then AP to break ties.
+All reported decisions use p_illicit>0.5; test labels never select settings.
+
+These are declared adaptations for this dataset and hardware, not exact paper
+reproduction. Both 4-thread and 8-thread resource probes took about7.5sec per
+full-graph gradient pass, using a disposable model without optimizer updates.
+Eight threads were fixed before experimental training began.
+
+The empty-graph audit removes both edge relations completely. It holds weights,
+normalization state and all node features fixed. PNA root computations remain.
+Since all initial account features are identical, the zero-edge output must be
+identical for every account. That alone does not establish explanation fidelity.

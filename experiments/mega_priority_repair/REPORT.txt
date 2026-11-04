@@ -1,0 +1,26 @@
+MEGA-PNA PRIORITIZED EXPLAINER REPAIR
+
+Detector checkpoint frozen. No detector training, test queries, defense or old full-run restart.
+
+Stage1: adapter matched physical deletion in40 binary checks. Raw-logit ranking removes sigmoid saturation ties. Frozen PG cross-fit replacement fell60.83% to55.0%; masked label preservation remained20/24.
+
+Development: eight previously exposed validation accounts. Three independent fits/seeds each.
+
+GNNExplainer1500steps: masked labels 24/24; cross-seed top5 replacement 22.50%; mean mask 0.00808.
+
+Normalized PGExplainer-TX60epochs: masked labels 23/24; cross-seed top5 replacement 40.83%; mean mask 0.02504.
+
+Confirmation:
+{
+  "state": "not_supported",
+  "methods": [],
+  "reason": "Neither explainer passed the predeclared development gate. No confirmation or attack runs authorized by this protocol."
+}
+
+Attack stage:
+{
+  "state": "skipped",
+  "reason": "No explainer passed independent quality confirmation."
+}
+
+These small validation pilots do not establish population reliability. Top5 displacement is not F1 loss or proof of misleading explanations. Failure to pass a gate is reported without automatically expanding or retuning. PG-TX and the fractional PNA mask are adaptations.

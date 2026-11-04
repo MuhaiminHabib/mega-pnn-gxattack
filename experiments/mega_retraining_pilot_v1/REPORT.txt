@@ -1,0 +1,19 @@
+SMALL OFFLINE MEGA-PNA RETRAINING PILOT
+AMLSim;8 training labels,2 training attack targets,16 updates,one training seed.
+All1500 validation accounts for detection. Two previously exposed validation targets for explanations.
+Three clean GNN seeds per model/account,4500steps; primary seed only for edited explanations.
+GX bank targets original frozen PG-TX and transfers to GNN. No fresh adaptive attacks on changed detectors.
+Prediction-consistency loss, not direct explanation-consistency training. Existing gradient limitations remain.
+
+Model | validation illicit F1 | clean top5/top25 agreement | GX/search top5 replacement | clean/GX illicit targets
+baseline | 87.69% | 73.33%/60.67% | 30.00%/30.00% | 2/2,2/2
+clean | 87.83% | 93.33%/68.67% | 20.00%/30.00% | 2/2,2/2
+random | 87.83% | 93.33%/68.00% | 20.00%/30.00% | 2/2,2/2
+adversarial | 87.83% | 93.33%/69.33% | 20.00%/30.00% | 2/2,2/2
+
+Exploratory candidate screen: False
+{'validation_f1_within1pp': True, 'clean_and_attack_illicit_retained': True, 'clean_top5_agreement_not_worse': True, 'less_attack_displacement_than_both_controls': False}
+Per-account retention, confidence drift, added-top5 counts, physical fidelity and edge isolation are in summary.json.
+Explanation replacement is not detector F1 loss. Seed pairs are dependent; no population confidence intervals.
+Original checkpoint unchanged. Every arm reported; no parameter/checkpoint selection from validation outcomes.
+No automatic next experiment or historical run resumption.

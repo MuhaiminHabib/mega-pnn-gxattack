@@ -1,0 +1,19 @@
+TEN NEW VALIDATION ACCOUNTS: FOUR FROZEN MEGA-PNA CHECKPOINTS
+AMLSim;8 training labels,2 training attack targets,16 updates,one training seed.
+All1500 validation accounts for detection. Ten new explanation targets; original validation detection metrics reused unchanged.
+Three clean GNN seeds per model/account,4500steps; primary seed only for edited explanations.
+GX bank targets original frozen PG-TX and transfers to GNN. No fresh adaptive attacks on changed detectors.
+Prediction-consistency loss, not direct explanation-consistency training. Existing gradient limitations remain.
+
+Model | validation illicit F1 | clean top5/top25 agreement | GX/search top5 replacement | clean/GX illicit targets
+baseline | 87.69% | 70.67%/72.80% | 48.00%/32.00% | 10/10,10/10
+clean | 87.83% | 80.00%/75.33% | 50.00%/36.00% | 10/10,10/10
+random | 87.83% | 80.00%/75.47% | 50.00%/36.00% | 10/10,10/10
+adversarial | 87.83% | 79.33%/75.47% | 50.00%/36.00% | 10/10,10/10
+
+Exploratory candidate screen: False
+{'validation_f1_within1pp': True, 'clean_and_attack_illicit_retained': True, 'clean_top5_agreement_not_worse': True, 'less_attack_displacement_than_both_controls': False}
+Per-account retention, confidence drift, added-top5 counts, physical fidelity and edge isolation are in summary.json.
+Explanation replacement is not F1 loss. Paired account-bootstrap intervals in summary.json; seed pairs are not independent samples.
+Original checkpoint unchanged. Every arm reported; no parameter/checkpoint selection from validation outcomes.
+No automatic next experiment or historical run resumption.
