@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "mode": "checkpoint_replay",
+  "source_and_protocol_hashes_checked": true,
+  "weights_unchanged": true,
+  "node_features_unchanged": true,
+  "literal_remaining_edges": 0,
+  "empty_output_range": 0.0,
+  "clean_replay_max_error": 0.0,
+  "saved_checkpoint_replay_errors": {
+    "full_graph": 0.0,
+    "no_transaction_edges": 0.0
+  },
+  "checkpoint_sha256": "23ce68c88147eb33c0e4c570016ee1a50b2c5d0235195ada4ec88ecf34e1da65",
+  "predictions_sha256": "6e4facfdec52731fb6f196ea3822c3de4811b7ac040d577dcbe92d618c983cdb",
+  "summary_sha256": "92934ded5008a85feb6d57d7835323e5412fa34dca77bde5c9f8c9f6317f6906",
+  "report_sha256": "a25ca6dcd3419a0b89fdde54a9aa50fe0df2e60b63134e869a9ce7150e82245e"
+}

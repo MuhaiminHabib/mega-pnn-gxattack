@@ -1,0 +1,46 @@
+MEGA-PNA / AMLSim: account classification and global edge-removal audit
+
+One fixed training seed (42); existing stratified account split seed 42.
+10000 accounts (1685 illicit), 1323234 individual transactions, 68947 directed account pairs.
+Node features are constant zero (upstream normalized ones); edges use normalized timestamp and amount.
+No account aggregates, account/customer IDs, behavior IDs, transaction fraud flags or alert IDs are input features.
+All accounts and edges are visible transductively; only training labels enter the supervised loss.
+AMLSim adapter uses the official MEGA model, raw encoders and node head; original model source is unchanged.
+Two MEGA-PNA layers, hidden width20, five towers, forward/reverse relations, edge updates, residuals, batch normalization, dropout0.1.
+Adam lr0.0008, weight decay0.00001; train-class inverse-frequency weights; full-batch CPU training.
+Maximum200 epochs, patience40, validation every5 epochs (also epoch1); checkpoint chosen by validation illicit F1, AP breaks ties.
+All classifications use p_illicit>0.5. No test threshold or model tuning.
+Selected epoch: 110.
+Edge removal deletes all transfers, including 181 self-transfers and all reverse relation copies.
+No computational self-loops are inserted. PNA root-feature computations remain active.
+Trained weights, normalization buffers, feature preprocessing and node features stay fixed.
+
+RESULTS (percent)
+Split | condition | illicit F1 | precision | recall | average precision | TP | FP | FN | TN
+train | full_graph | 86.55 | 96.94 | 78.17 | 93.30 | 856 | 27 | 239 | 5378
+train | no_transaction_edges | 0.00 | 0.00 | 0.00 | 16.85 | 0 | 0 | 1095 | 5405
+validation | full_graph | 87.69 | 96.67 | 80.24 | 91.14 | 203 | 7 | 50 | 1240
+validation | no_transaction_edges | 0.00 | 0.00 | 0.00 | 16.87 | 0 | 0 | 253 | 1247
+test | full_graph | 83.83 | 94.42 | 75.37 | 88.46 | 254 | 15 | 83 | 1648
+test | no_transaction_edges | 0.00 | 0.00 | 0.00 | 16.85 | 0 | 0 | 337 | 1663
+all | full_graph | 86.18 | 96.40 | 77.92 | 91.98 | 1313 | 49 | 372 | 8266
+all | no_transaction_edges | 0.00 | 0.00 | 0.00 | 16.85 | 0 | 0 | 1685 | 8315
+
+CORRECTLY DETECTED ILLICIT ACCOUNTS AFTER REMOVAL
+Split | remained illicit / originally correctly detected | mean confidence change (percentage points)
+train | 0/856 | -82.84
+validation | 0/203 | -84.03
+test | 0/254 | -83.68
+all | 0/1313 | -83.19
+
+LIMITATIONS
+This is a single-seed AMLSim adaptation, not a reproduction of the paper's IBM AML edge-classification benchmark.
+The dataset/task, full-batch training, class weights, stopping rule and edge feature availability differ from paper benchmarks.
+All original transfers are retained; no sampling, filtering of difficult accounts or collapsing parallel transfers was used.
+Constant node inputs mean that deleting all transactions makes all account inputs indistinguishable.
+The empty graph must therefore produce one common probability. It may classify all accounts as licit OR all as illicit.
+Zero label retention alone would not prove faithful explanations, and high retention could just mean an all-illicit output.
+This extreme out-of-distribution test measures transaction dependence, not explanation quality or adversarial robustness.
+Its feature design differs from the earlier aggregate-feature GraphSAGE; differences cannot be attributed to architecture alone.
+An account-random split does not establish performance on future time periods. No explainer or defense is trained here.
+Checkpoint replay, feature/weight hashes, every account prediction and all split denominators are saved.
