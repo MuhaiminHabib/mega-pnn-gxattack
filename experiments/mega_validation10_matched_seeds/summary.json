@@ -1,0 +1,53 @@
+{
+  "state": "stopped_after_repeated_pc_restarts",
+  "planned_fits": 360,
+  "verified_saved_fits": 160,
+  "invalid_records": [],
+  "common_complete_accounts": [
+    1655,
+    9872,
+    9952,
+    2516
+  ],
+  "rows": [
+    {
+      "arm": "baseline",
+      "completed_fits": 45,
+      "common_accounts": 4,
+      "attack_top5_replacement_pct": 50.0,
+      "random_top5_replacement_pct": 31.666666666666664,
+      "attack_top25_replacement_pct": 34.0,
+      "random_top25_replacement_pct": 24.0
+    },
+    {
+      "arm": "clean",
+      "completed_fits": 43,
+      "common_accounts": 4,
+      "attack_top5_replacement_pct": 56.66666666666667,
+      "random_top5_replacement_pct": 35.0,
+      "attack_top25_replacement_pct": 35.0,
+      "random_top25_replacement_pct": 22.0
+    },
+    {
+      "arm": "random",
+      "completed_fits": 36,
+      "common_accounts": 4,
+      "attack_top5_replacement_pct": 56.66666666666667,
+      "random_top5_replacement_pct": 35.0,
+      "attack_top25_replacement_pct": 35.0,
+      "random_top25_replacement_pct": 22.0
+    },
+    {
+      "arm": "adversarial",
+      "completed_fits": 36,
+      "common_accounts": 4,
+      "attack_top5_replacement_pct": 58.333333333333336,
+      "random_top5_replacement_pct": 36.666666666666664,
+      "attack_top25_replacement_pct": 35.333333333333336,
+      "random_top25_replacement_pct": 22.333333333333332
+    }
+  ],
+  "seed_formula": "20261017 + node + repeat * 100000",
+  "steps_per_fit": 4500,
+  "note": "Partial snapshot. Means use only accounts with all 36 fits complete and eligible across all four arms. Seed effects are paired within each account."
+}
