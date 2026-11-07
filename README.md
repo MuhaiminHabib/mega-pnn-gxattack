@@ -22,4 +22,5 @@ The values are mean top-25 replacement on ten validation accounts. All checkpoin
 
 The source is archived for analysis and porting. The historical controllers use the original Windows paths, frozen manifests, and GPU environment. For detector replay, install the dependencies in [AMLSIM_SETUP.txt](model/AMLSIM_SETUP.txt), supply the original AMLSim CSVs, and restore `best.pt`, `protocol.json`, and `predictions.npz` under `model/results/amlsim_edge_audit_v1/`. Then run `python tools/replay_detector.py --raw PATH_TO_AMLSIM --output runs/detector-replay`. Binary checkpoints, raw masks, and full historical artifacts are outside this upload.
 
-Latest [partial matched-seed rerun](experiments/mega_validation10_matched_seeds/README.md) includes 160 verified fits and paired comparisons on four common completed accounts.
+Latest [completed matched-seed rerun](experiments/mega_validation10_matched_seeds/README.md) includes all 360 verified fits and paired comparisons on all ten accounts.
+

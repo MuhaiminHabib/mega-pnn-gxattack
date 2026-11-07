@@ -1,53 +1,59 @@
 {
-  "state": "stopped_after_repeated_pc_restarts",
+  "state": "complete",
   "planned_fits": 360,
-  "verified_saved_fits": 160,
+  "verified_saved_fits": 360,
   "invalid_records": [],
   "common_complete_accounts": [
     1655,
     9872,
     9952,
-    2516
+    2516,
+    9670,
+    5911,
+    7547,
+    422,
+    5979,
+    3463
   ],
   "rows": [
     {
       "arm": "baseline",
-      "completed_fits": 45,
-      "common_accounts": 4,
-      "attack_top5_replacement_pct": 50.0,
-      "random_top5_replacement_pct": 31.666666666666664,
-      "attack_top25_replacement_pct": 34.0,
-      "random_top25_replacement_pct": 24.0
+      "completed_fits": 90,
+      "common_accounts": 10,
+      "attack_top5_replacement_pct": 46.0,
+      "random_top5_replacement_pct": 34.0,
+      "attack_top25_replacement_pct": 39.33333333333333,
+      "random_top25_replacement_pct": 28.933333333333334
     },
     {
       "arm": "clean",
-      "completed_fits": 43,
-      "common_accounts": 4,
-      "attack_top5_replacement_pct": 56.66666666666667,
-      "random_top5_replacement_pct": 35.0,
-      "attack_top25_replacement_pct": 35.0,
-      "random_top25_replacement_pct": 22.0
+      "completed_fits": 90,
+      "common_accounts": 10,
+      "attack_top5_replacement_pct": 48.666666666666664,
+      "random_top5_replacement_pct": 38.0,
+      "attack_top25_replacement_pct": 36.8,
+      "random_top25_replacement_pct": 28.4
     },
     {
       "arm": "random",
-      "completed_fits": 36,
-      "common_accounts": 4,
-      "attack_top5_replacement_pct": 56.66666666666667,
-      "random_top5_replacement_pct": 35.0,
-      "attack_top25_replacement_pct": 35.0,
-      "random_top25_replacement_pct": 22.0
+      "completed_fits": 90,
+      "common_accounts": 10,
+      "attack_top5_replacement_pct": 47.333333333333336,
+      "random_top5_replacement_pct": 38.666666666666664,
+      "attack_top25_replacement_pct": 36.4,
+      "random_top25_replacement_pct": 28.4
     },
     {
       "arm": "adversarial",
-      "completed_fits": 36,
-      "common_accounts": 4,
-      "attack_top5_replacement_pct": 58.333333333333336,
-      "random_top5_replacement_pct": 36.666666666666664,
-      "attack_top25_replacement_pct": 35.333333333333336,
-      "random_top25_replacement_pct": 22.333333333333332
+      "completed_fits": 90,
+      "common_accounts": 10,
+      "attack_top5_replacement_pct": 48.0,
+      "random_top5_replacement_pct": 39.33333333333333,
+      "attack_top25_replacement_pct": 36.53333333333333,
+      "random_top25_replacement_pct": 28.266666666666666
     }
   ],
   "seed_formula": "20261017 + node + repeat * 100000",
   "steps_per_fit": 4500,
-  "note": "Partial snapshot. Means use only accounts with all 36 fits complete and eligible across all four arms. Seed effects are paired within each account."
+  "note": "Completed run. All ten accounts have all 36 fits complete and eligible. Seed effects are paired within each account."
 }
